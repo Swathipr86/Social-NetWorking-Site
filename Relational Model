@@ -1,0 +1,77 @@
+3.1 Database languages
+Four categories of database languages :
+1. Data definition language (DDL)
+Data definition language (DDL) creates the framework of the database by specifying the database schema, which is the structure that represents the organization of data. Its common uses include the creation and alteration of tables, files, indexes and columns within the database. This language also allows users to rename or drop the existing database or its components. 
+Here's a list of DDL statements:
+•  CREATE: Creates a new database or object, such as a table, index or column.
+•  ALTER: Changes the structure of the database or object.
+•  DROP: Deletes the database or existing objects.
+•  RENAME: Renames the database or existing objects.
+
+2. Data manipulation language (DML)
+Data manipulation language (DML) provides operations that handle user requests, offering a way to access and manipulate the data that users store within a database. Its common functions include inserting, updating and retrieving data from the database. 
+Here's a list of DML statements:
+•  INSERT: Adds new data to the existing database table.
+•  UPDATE: Changes or updates values in the table.
+•  DELETE: Removes records or rows from the table.
+•  SELECT: Retrieves data from the table or multiple tables.
+
+3. Data control language (DCL)
+Data control language (DCL) controls access to the data that users store within a database. Essentially, this language controls the rights and permissions of the database system. It allows users to grant or revoke privileges to the database.
+ Here's a list of DCL statements:
+•  GRANT: Gives a user access to the database.
+•  REVOKE: Removes a user's access to the database.
+4. Transaction control language (TCL)
+Transaction control language (TCL) manages the transactions within a database. Transactions group a set of related tasks into a single, executable task. All the tasks must succeed in order for the transaction to work. Here's a list of TCL statements:
+•  COMMIT: Carries out a transaction.
+•  ROLLBACK: Restores a transaction if any tasks fail to execute.
+
+3.2 Table Description
+Following are the tables along with constraints used in Social Networking Site database.
+1.Customer: The "Customer" table stores customer information with ID, name, email, password, and registration date, utilizing integer, varchar, and date data types. The ID column is the primary key.
+Constraint: The "Customer" table enforces constraints such as primary key for "cid" and non-null requirements for "cname", "cemail", "password", and "registration_date" columns.
+2. Profile: The "Profile" table stores additional information about customers such as full name, date of birth, and gender, with the customer ID (cid) serving as the primary key and a foreign key constraint referencing the "Customer" table.
+
+Constraint: The "Profile" table includes a primary key constraint on "cid" and a foreign key constraint referencing "cid" in the "Customer" table, maintaining data integrity and establishing a relationship.
+3.Friends: The "Friends" table represents the friendship relationship between customers using their IDs, with a composite primary key and foreign key constraints referencing the "Customer" table for data integrity.
+Constraint: The "Friends" table enforces constraints including a composite primary key on "cid" and "friend_id", and foreign key constraints referencing the "Customer" table for maintaining data integrity and establishing the friendship relationship.
+4.Followers: The "Followers" table represents the followership relationship between customers using their IDs, with a composite primary key and foreign key constraints referencing the "Customer" table for data integrity.
+Constraint: The "Followers" table enforces constraints including a composite primary key on "cid" and "follower_id", and foreign key constraints referencing the "Customer" table for maintaining data integrity and establishing the followership relationship.
+
+5.Post: The table "Post" stores posts with a unique identifier, category ID, text content, and date of creation.
+Constraint: The "Post" table has constraints that enforce the primary key on the "post_id" column, the non-null constraint on the "cid" column, the non-null constraint on the "post_text" column, and the non-null constraint on the "post_date" column.
+6.Comments: The "Comments" table stores comments with a unique identifier, associated post ID, customer ID, content, and foreign key constraints referencing the "Post" and "Customer" tables.
+Constraint: The "Comments" table has constraints that enforce the primary key on the "comment_id" column and foreign key constraints on the "post_id" and "cid" columns, referencing the "Post" and "Customer" tables, respectively.
+7.PostLikes: The "PostLikes" table stores likes on posts with a unique identifier, associated post ID, customer ID, and foreign key constraints referencing the "Post" and "Customer" tables.
+Constraint: The "PostLikes" table has constraints that enforce the primary key on the "like_id" column and foreign key constraints on the "post_id" and "cid" columns, referencing the "Post" and "Customer" tables, respectively.
+8. CommentLikes:The "CommentLikes" table stores likes on comments with a unique identifier, associated comment ID, customer ID, and foreign key constraints referencing the "Comments" and "Customer" tables.
+Constraints: The "CommentLikes" table has constraints that enforce the primary key on the "like_id" column and foreign key constraints on the "comment_id" and "cid" columns, referencing the "Comments" and "Customer" tables, respectively.
+9. Conversations:The "Conversations" table stores conversations with a unique identifier, and foreign key constraints referencing the "Customer" table for user1 and user2 IDs.
+Constraints: The "Conversations" table has constraints that enforce the primary key on the "conversation_id" column and foreign key constraints on the "user1_id" and "user2_id" columns, referencing the "Customer" table for customer IDs.
+10. Messages: The "Messages" table stores messages with a unique identifier, associated conversation ID, sender ID, receiver ID, content, and foreign key constraints referencing the "Conversations" and "Customer" tables.
+Constraints: The "Messages" table has constraints that enforce the primary key on the "message_id" column and foreign key constraints on the "conversation_id", "sender_id", and "receiver_id" columns, referencing the "Conversations" and "Customer" tables, respectively.
+11. Notifications: The "Notifications" table stores notifications with a unique identifier, customer ID, notification text, notification date, and a foreign key constraint referencing the "Customer" table.
+Constraints: The "Notifications" table has constraints that enforce the primary key on the "notification_id" column and a foreign key constraint on the "cid" column, referencing the "Customer" table.
+
+12.Groups: The "Groups" table stores groups with a unique identifier, group name, and group description.
+Constraints: The "Groups" table has a primary key constraint on the "group_id" column, ensuring its uniqueness.
+13.GroupMembers: The "GroupMembers" table stores group membership information with group ID, customer ID, join date, and constraints including a composite primary key on group_id and cid, and foreign key constraints referencing the "Groups" and "Customer" tables.
+Constraint: The "GroupMembers" table has constraints that enforce a composite primary key on the "group_id" and "cid" columns, as well as foreign key constraints on the "group_id" and "cid" columns, referencing the "Groups" and "Customer" tables, respectively.
+14.Report: The "Report" table stores reports with a unique identifier, customer ID, post ID, report reason, report date, and foreign key constraints referencing the "Customer" and "Posts" tables.
+Constraints: The "Report" table has constraints that enforce the primary key on the "report_id" column, and foreign key constraints on the "cid" and "post_id" columns,          referencing the "Customer" and "Posts" tables, respectively.
+3.3 Relational Database Scheme
+The relational database schema for Social Networking Site database is as follows:
+1.	Customer(cid,cname,cemail,password,registration_date)
+2.	Profile(cid,full_name,date_of_birth,gender)
+3.	Friends(cid,friend_id,status)
+4.	Followers(cid,follower_id)
+5.	Post(post_id,cid,post_text,post_date)
+6.	Comments(comment_id,cid,content)
+7.	PostLikes(like_id,post_id,cid)
+8.	CommentsLikes(like_id,comment_id,cid)
+9.	Conversations(conversation_id,user1_id,user2_id)
+10.	Messages(message_id,conversation_id,sender_id,receiver_id,content)
+11.	Notifications(notification_id,cid,notification_text,notification_date)
+12.	Groups(group_id,group_name,group_description)
+13.	GroupMembers(group_id,cid,join_date)
+Report(report_id,cid,post_id,repot_date)
