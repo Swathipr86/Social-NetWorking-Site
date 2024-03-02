@@ -1,0 +1,1092 @@
+3.4 Relational Queries
+/* create a table customer*/
+CREATE TABLE Customer (
+    cid INT PRIMARY KEY,
+    cname VARCHAR(50) NOT NULL,
+    cemail VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    registration_date DATE NOT NULL
+);
+INSERT INTO  Customer
+VALUES
+      (1,'swathi','swathi@gmail.com','s10101','2020-09-19' ),
+      (2,'samuel','samuel@gmail.com','sam0140','2021-12-06'),
+      (3, 'john_doe', 'john@example.com', 'password123', '2023-01-19'),
+      (4, 'jane_smith', 'jane@example.com', 'secret456', '2022-02-01'),
+      (5,'sid','sid@gmail.com','sid53','2020-08-30'),
+  select * from customer
+Output:
+sno	cid	cname	     		cmobile	cage	Crating
+1	101	Swathi			8074942456	17	10
+2	102	Samuel			6304634778	20	9
+3	103	Sid Sriram		33333333	28	8
+4	104	Anirudh		444444444	23	9
+5	105	Jonita			555555555	24	8
+6	106	Arman Malik		666666666	26	7
+7	107	Arjith Singh		777777777	32	8
+8	108	SPB			8888888888	21	9
+9	109	Sunitha		99999999	23	9
+10	110	DSP			8925674397	28	7
+11	111	Chitra			1313131313	26	8
+12	112	Ram Miriyala		1414141414	29	9
+13	113	Anurag Kulakarni	1515151515	34	9
+14	114	SS Thaman		7895461259	35	8
+15	115	Dhvani Bhanushali	1717171717	32	8
+16	116	Neha Kakkar		1818181818	37	9
+/*create a table Profile*/
+CREATE TABLE Profile (
+   cid INT PRIMARY KEY,
+    full_name VARCHAR(100),
+    date_of_birth DATE,
+    gender VARCHAR(10),
+    FOREIGN KEY (cid) REFERENCES Customer(cid)
+);
+INSERT INTO Profile
+VALUES
+      (1,'swathipr','2005-09-19','Female'),
+      (2,'samuelpr','2001-12-06','Male'),
+      (3, 'john_doe','2003-01-19','Male'),
+      (4, 'jane_smith', '1996-02-01','Male'),
+      (5,'sid sriram','1986-08-30','Male'),
+      (6,'anirudh ravichander','1999-02-24','Male');
+ select * from Profile
+Output:
+cid	full_name		 date_of_birth	gender
+1	swathipr		2005-09-19		Female
+2	samuelpr		2001-12-06		Male
+3	john_doe		2003-01-19		Male
+4	jane_smith		1996-02-01		Male
+5	sid sriram		1986-08-30		Male
+6	anirudh ravichander	1999-02-24		Male
+7	sunny komarla		1982-04-18		Male
+8	manu komarla		2002-01-05		Male
+9	bhuvana sura		2001-03-24		Female
+10	siri sivapuram		1996-09-17		Female
+11	mahi komarla		1986-09-14		Female
+12	anjalipr		1997-09-26		Female
+13	rayudupr		1994-05-16		Male
+14	ms dhoni		1989-03-26		Male
+15	ravindra jadeja		1995-07-20		Male
+16	rohit sharma		1989-05-31		Male
+/*create a table Friends*/
+CREATE TABLE Friends (
+   cid INT,
+    friend_id INT,
+    status VARCHAR(20) NOT NULL,
+    PRIMARY KEY (cid, friend_id),
+    FOREIGN KEY (cid) REFERENCES Customer(cid),
+    FOREIGN KEY (friend_id) REFERENCES Customer(cid),
+);
+INSERT INTO Friends (cid, friend_id, status)
+VALUES
+    (1, 2, 'Accepted'),
+    (2, 1, 'Pending'),
+    (3, 4, 'Accepted'),
+    (4, 3, 'Accepted'),
+    (5, 6, 'Pending'),
+Select * from friends
+Output:
+cid	friend_id	status
+1	2		Accepted
+2	1		Pending
+3	4		Accepted
+4	3		Accepted
+5	6		Pending
+6	5		Accepted
+7	8		Accepted
+8	7		Accepted
+9	10		Accepted
+10	9		Accepted
+11	12		Accepted
+12	11		Accepted
+13	14		Pending
+/* create a table Followers*/
+CREATE TABLE Followers (
+    cid INT,
+    follower_id INT,
+    PRIMARY KEY (cid, follower_id),
+    FOREIGN KEY (cid) REFERENCES Customer(cid),
+    FOREIGN KEY (follower_id) REFERENCES Customer(cid)
+);
+INSERT INTO Followers (cid, follower_id)
+VALUES
+(41, 2),
+(22, 1),
+(33, 5),
+(14, 1),
+(35, 2),
+Select * from followers
+Output:
+cid	follower_id
+1	20
+2	21
+2	30
+3	29
+3	41
+4	15
+5	36
+6	17
+7	28
+8	6
+8	19
+9	7
+9	10
+10	8
+10	11
+10	38
+11	12
+12	23
+12	28
+/* create a table Post*/
+  CREATE TABLE Post(
+  post_id int PRIMARY KEY,
+  cid INT NOT NULL,
+  post_text VARCHAR(255) NOT NULL,
+  post_date DATE NOT NULL
+); 
+insert into Post values
+ (101,19,'Hello','2023-03-29'),
+ (110, 10, 'Hello World!', '2023-01-01'),
+ (121, 12, 'This is a test.', '2023-01-02'),
+ (102, 14, 'Hello world!', '2023-05-18 '),
+ (103, 27, 'Having a great day!', '2023-05-18 '),
+ (133, 23, 'Check out this amazing photo!', '2023-05-18'),
+ (104,11, 'Excited for the weekend!', '2023-05-18'),
+ (105, 34, 'Just finished a challenging project!', '2023-05-19 '),
+Select * from post
+Output:
+post_id		cid	post_text						post_date
+101		19	Hello							2023-03-29
+102		14	Hello world!						2023-05-18
+103		27	Having a great day!					2023-05-18
+104		11	Excited for the weekend!				2023-05-18
+105		34	Just finished a challenging project!			2023-05-19
+106		20	What's your favorite movie?				2023-05-19
+107		13	Looking for recommendations new books to read.    2023-05-19
+108		40	Feeling motivated today!				2023-05-19
+109		12	Just visited an amazing art exhibition!		2023-05-19
+110		10	Hello World!						2023-01-01
+111		22	Happy birthday to my dear friend!			2023-05-19
+112		41	After long Time!!					2021-09-19
+/*create table Comments*/
+CREATE TABLE Comments (
+    comment_id INT PRIMARY KEY,
+    post_id INT,
+    cid INT,
+    content VARCHAR(500),
+    FOREIGN KEY (post_id) REFERENCES Post(post_id),
+    FOREIGN KEY (cid) REFERENCES Customer(cid)
+);
+INSERT INTO Comments 
+VALUES (201, 101, 1, 'Super Post!'),
+ (202, 101, 2, 'Nice post!'),
+ (203, 102, 3, 'I have a question regarding this post.'),
+ (204, 102, 1, 'Thanks for sharing!'),
+ (205, 103, 3, 'Great job!'),
+ (206, 104, 2, 'Interesting topic.'),
+  select * from comments
+Output:
+comment_id		post_id	 cid	content
+201			101		1	Super Post!
+202			101		2	Nice post!
+203			102		3	I have a question regarding this post.
+204			102		1	Thanks for sharing!
+205			103		3	Great job!
+206			104		2	Interesting topic.
+207			104		1	I completely agree.
+208			105		3	This post helped me a lot.
+209			106		2	Looking forward to more content like this.
+/*create table PostLikes*/
+CREATE TABLE PostLikes (
+  like_id INT PRIMARY KEY,
+  post_id INT,
+  cid INT,
+   FOREIGN KEY (post_id) REFERENCES Post(post_id),
+  FOREIGN KEY (cid) REFERENCES Customer(cid)
+);
+INSERT INTO PostLikes 
+VALUES (301, 101, 1),
+ (302, 101, 2),
+  (303, 102, 3),
+  (304, 102, 1),
+  (305, 103, 3),
+ (306, 104, 2),
+Select * from postlikes
+OUTPUT:
+like_id	post_id	cid
+301	101	1
+302	101	2
+303	102	3
+304	102	1
+305	103	3
+306	104	2
+307	104	1
+308	105	3
+309	106	2
+310	107	1
+311	107	3
+312	108	2
+313	109	1
+314	109	3
+315	110	2
+316	111	1
+317	112	3
+319	103	1
+320	109	3
+/*create table commentlikes
+CREATE TABLE CommentLikes (
+  like_id INT PRIMARY KEY,
+  comment_id INT,
+  cid INT,
+   FOREIGN KEY (comment_id) REFERENCES Comments(comment_id),
+  FOREIGN KEY (cid) REFERENCES Customer(cid)
+);
+INSERT INTO CommentLikes 
+VALUES (301, 201, 1),
+ (302, 201, 2),
+ (303, 202, 3),
+ (304, 202, 1),
+ (305, 203, 3),
+ (306, 204, 2),
+  select * from commentlikes
+Output:
+like_id		comment_id		cid
+301		201			1
+302		201			2
+303		202			3
+304		202			1
+305		203			3
+306		204			2
+307		204			1
+308		205			3
+309		206			2
+/*create table conversations*/
+CREATE TABLE Conversations (
+    conversation_id INT PRIMARY KEY,
+    user1_id INT,
+    user2_id INT,
+    FOREIGN KEY (user1_id) REFERENCES Customer(cid),
+    FOREIGN KEY (user2_id) REFERENCES Customer(cid)
+);
+INSERT INTO Conversations 
+VALUES (401, 1, 2),
+ (402, 1, 3),
+ (403, 1, 4),
+ (404, 1, 5),
+ (405, 1, 6),
+ (406, 1, 7),
+Select  * from conversations
+OUTPUT:
+conversation_id	user1_id	user2_id
+401			1		2
+402			1		3
+403			1		4
+404			1		5
+405			1		6
+406			1		7
+407			1		8
+408			1		9
+409			1		10
+/*create table Messages*/
+CREATE TABLE Messages (
+    message_id INT PRIMARY KEY,
+    conversation_id INT,
+    sender_id INT,
+    receiver_id INT,
+    content VARCHAR(1000),
+        FOREIGN KEY (conversat2ion_id) REFERENCES Conversations(conversation_id),
+    FOREIGN KEY (sender_id) REFERENCES Customer(cid),
+    FOREIGN KEY (receiver_id) REFERENCES Customer(cid)
+);
+INSERT INTO Messages 
+VALUES (1, 401, 1, 20, 'Hello, how are you?'),
+ (2, 402, 2, 11, ' Iam doing well, thank you! How about you?'),
+ (3, 403, 31, 32, ' Iam doing great too! Just enjoying the day.'),
+ (4, 404, 29, 41, 'That good to hear! Anything interesting happening?'),
+ (5, 405, 18, 22, 'Not much, just catching up on some work.'),
+Select * from messages
+
+OUTPUT:
+message_id	conversation_id	sender_id	receiver_id	content
+1		401	1	20	Hello, how are you?
+2		402	2	11	 Iam doing well, thank you! How about you?
+3		403	31	32	 Iam doing great too! Just enjoying the day.
+4		404	29	41	That good to hear! Anything interesting happening?
+5		405	18	22	Not much, just catching up on some work.
+6		406	21	17	Soundsproductive! Iamplanning go for hike 
+7		407	12	32	That sounds like a great plan! Enjoy your hike.
+8		408	20	19	Thanks! I will share some pictures with you afterward.
+9		409	11	2	I will be looking forward to it!
+/*create table Notifications*/
+CREATE TABLE Notifications (
+    notification_id INT PRIMARY KEY,
+    cid INT,
+    notification_text TEXT,
+    notification_date date  not null,
+    FOREIGN KEY (cid) REFERENCES Customer(cid)
+);
+INSERT INTO Notifications 
+VALUES
+    (601, 1, 'You have a new message.', '2023-05-18'),
+    (602, 2, 'Your post has been liked.', '2023-02-18'),
+    (603, 3, 'Someone commented on your post.', '2023-05-18'),
+    (604, 4, 'Your friend request has been accepted.', '2023-04-11'),
+    (605, 5, 'You have been mentioned in a post.', '2023-01-28'),
+Select * from Notifications
+OUTPUT:
+notification_id   cid	notification_text				notification_date
+601		   1	You have a new message.			2023-05-18
+603	               3	Someone commented on your post.		2023-05-18
+604                    4	Your friend request has been accepted.	2023-04-11
+605	              5	You have been mentioned in a post.		2023-01-28
+606	              6	A new event has been created.		2022-05-30
+607	              7	You have a new friend suggestion.		2021-01-17
+608	              8	Your post has been shared.			2023-01-06
+609	              9	You have received a new friend request.	2022-09-19
+610	              10	Your profile has been updated.		2023-01-06
+/*create table group*/
+CREATE TABLE Groups (
+    group_id INT PRIMARY KEY,
+    group_name VARCHAR(100),
+    group_description TEXT
+);
+INSERT INTO Groups (group_id, group_name, group_description)
+VALUES
+    (801, 'Sports Enthusiasts', 'A group for passionate sports fans'),
+    (802, 'Food Lovers', 'Exploring the world of culinary delights'),
+    (803, 'Travel Junkies', 'Sharing travel stories and tips'),
+    (804, 'Tech Geeks', 'Discussing the latest technology trends'),
+    (805, 'Bookworms United', 'For avid readers and book lovers'),
+Select * from groups
+OUTPUT:
+group_id	group_name				group_description
+801		Sports Enthusiasts		A group for passionate sports fans
+802		Food Lovers			Exploring the world of culinary delights
+803		Travel Junkies			Sharing travel stories and tips
+804		Tech Geeks 			Discussing the latest technology trends
+805		Bookworms United		For avid readers and book lovers
+806		Fitness Freaks			Motivating each othertowards healthy lifestyle
+807		Music Addicts			All about music and sharing favorite tunes
+808		Photography Enthusiasts	Capturing the world through lenses
+809		Fashionistas			Fashion trends, styles, and inspirations
+/*create table GroupMembers*/
+CREATE TABLE GroupMembers (
+    group_id INT,
+    cid INT,
+    join_date DATE,
+    PRIMARY KEY (group_id, cid), 
+    FOREIGN KEY (group_id) REFERENCES Groups(group_id),
+    FOREIGN KEY (cid) REFERENCES Customer(cid)
+);
+INSERT INTO GroupMembers (group_id, cid, join_date) VALUES
+(801, 1, '2020-01-01'),
+(802, 2, '2022-02-02'),
+(803, 7, '2023-01-07'),
+(804, 10, '2023-01-10'),
+(805, 5, '2020-07-05'),
+Select * from GroupMembers
+OUTPUT:
+group_id	cid	join_date
+801		1	2020-01-01
+802		2	2022-02-02
+803		7	2023-01-07
+804		10	2023-01-10
+805		5	2020-07-05
+806		6	2021-06-06
+807		7	2021-11-10
+808		8	2023-12-30
+809		9	2022-01-01
+810		10	2020-02-21
+/*create table Report*/
+CREATE TABLE Report(
+    report_id INT PRIMARY KEY,
+    cid INT,
+    post_id INT,
+    report_reason TEXT,
+	report_date date not null,
+    FOREIGN KEY (cid) REFERENCES Customer(cid),
+    FOREIGN KEY (post_id) REFERENCES Posts(post_id)
+);
+INSERT INTO Report(report_id, cid, post_id, report_reason, report_date) VALUES
+    (701, 41, 134, 'Inappropriate content', '2023-05-18'),
+    (702, 2, 135, 'Spamming', '2022-03-18'),
+    (703, 3, 136, 'Harassment', '2021-04-28'),
+    (704, 4, 137, 'Fake account', '2020-02-08'),
+    (705, 5, 138, 'Violation of terms', '2023-03-30'),
+Select * from Report
+OUTPUT:
+report_id	cid	post_id	report_reason		report_date
+701		41	134		Inappropriate content		2023-05-18
+702		2	135		Spamming			2022-03-18
+703		3	136		Harassment			2021-04-28
+704		4	137		Fake account			2020-02-08
+705		5	138		Violation of terms		2023-03-30
+706		6	139		Cyberbullying			2022-07-06
+707		7	140		Impersonation			2021-08-27
+708		8	141		Privacy infringement		2020-09-19
+709		9	142		Offensive content		2023-01-20
+
+SQL QUERIES:
+1.Find out the customers who are the most popular users in the database?
+Command:
+SELECT cid, COUNT(*) AS total_likes
+FROM PostLikes
+GROUP BY cid
+ORDER BY total_likes DESC;
+Output:
+cid	total_likes
+1	7
+3	7
+2	5
+
+2.Update customer relation by adding age as an attribute and data type as int with null constraint.
+Command:
+alter table customer
+add cage int null;
+
+
+Output:
+cid	cname		cemail					registration_date	cage
+1	swathi		swathi@gmail.com			2020-09-19		17
+2	samuel		samuel@gmail.com			2021-12-06		21
+3	john_doe	john@example.com			2023-01-19		32
+4	jane_smith	jane@example.com			2022-02-01		26
+5	sid		sid@gmail.com			2020-08-30		20
+6	anirudh	anirudh@gmail.com			2021-02-24		29
+7	sunny		sunny@gmail.com			2019-04-18		39
+8	manu		manu@gmail.com			2016-01-05		41
+9	bhuvana	bhuvana@gmail.com			2014-03-24		32
+10	siri		siri@gmail.com		            2014-09-17		26
+11	mahi		mahi@gmail.com		            2016-09-14		37
+12	anjali		anjali@gmail.com			2023-09-26		22
+13	rayudu		rayudu@gmail.com			2019-05-16		30
+14	dhoni		dhoni@gmail.com		            2017-03-26		45
+15	jadeja		jadeja@gmail.com			2019-07-20		23
+16	rohit		rohit@gmail.com		            2018-05-31		42
+17	hardik		hardik@gmail.com			2021-03-01		NULL
+18	faf		faf@gmail.com		            2023-06-14		NULL
+19	gill		gill@gmail.com			2022-09-19		NULL
+
+ 3.Find out the average age of the customer?
+Command:
+SELECT AVG(cage) AS average_age
+FROM Customer;
+Output:
+average_age
+30
+
+4.How many users are there in the database?
+Command:
+SELECT COUNT(*) AS total_customer FROM Customer;
+Output:
+total_customer
+41
+
+5.Find out the 5 customers who are the most active users in the database?
+Command:
+SELECT  top(5) cid, COUNT(*) AS total_posts
+FROM Post
+GROUP BY cid
+ORDER BY total_posts DESC;
+Output:
+cid	total_posts
+12	2
+22	2
+23	2
+27	2
+34	2
+
+6.Find posts of customer where cid=19,10 and 27.
+Command:
+SELECT * FROM post WHERE cid IN (19, 10,27);
+Output:
+post_id   cid	post_text		     post_date
+101	    19	Hello			     2023-03-29
+103	    27	Having a great day!	     2023-05-18
+110	    10	Hello World!		     2023-01-01
+140	    27	Exploring new places...   2021-01-20
+
+7.Find full name ,gender,date of birth of a customer where cid=1,2 and 19.
+Command:
+select full_name,gender,date_of_birth from profile where cid in(1,2,19)
+Output:
+full_name	gender		date_of_birth
+swathipr	Female		2005-09-19
+samuelpr	Male		2001-12-06
+shubmangill	Male		2000-09-19
+
+8.Find out the total number of customers who registred  last year.
+Command:
+Select count(*) as registred _lastyear from customer where
+registration_date>=DATEADD(year,-1,GETDATE())
+AND registration_date<GETDATE();
+Output:
+registred_lastyear
+5
+
+9.Create a temporary table for sender_id .
+Command:
+select * into Chat from Messages where sender_id=21
+select * from Chat
+Output:
+message_id	conversation_id	sender_id	receiver_id	content
+6		406			21		17		Sounds productive! 
+13		413			21		23		Iam doing well too.  
+
+		
+10.Create a view that contains list of content  where comment_id is 217.
+Command:
+create  view review as(
+select * from comments where comment_id=217)
+select * from review
+Output:
+comment_id	post_id	cid	content
+217	            112		3	I enjoyed reading this.
+
+11.Find out the status,cid and friend_id where friend_id not in 14,20,8,15.
+Command:
+select cid,status,friend_id from friends where friend_id not in (14,20,8,15)
+Output:
+cid	status	          friend_id
+1	Accepted	2
+2	Pending	1
+3	Accepted	4
+4	Accepted	3
+5	Pending	6
+6	Accepted	5
+8	Accepted	7
+9	Accepted	10
+10	Accepted	9
+11	Accepted	12
+12	Accepted	11
+14	Accepted	13
+15	Accepted	16
+17	Accepted	18
+18	Accepted	17
+20	Accepted	19
+
+12. Create a simple relation that contains report id integer and primary key,cid int foreign key,report date date with not null constraint,report reason reason as text data type and post id  as foreign key make this relation as Report.
+Command:
+CREATE TABLE Report(
+    report_id INT PRIMARY KEY,
+    cid INT,
+    post_id INT,
+    report_reason TEXT,
+	report_date date not null,
+    FOREIGN KEY (cid) REFERENCES Customer(cid),
+    FOREIGN KEY (post_id) REFERENCES Posts(post_id)
+);
+select * from Report
+Output:
+report_id	cid	post_id	report_reason	report_date
+
+
+13.Insert the records in Report relation. 
+Command:
+INSERT INTO Report
+VALUES
+    (701, 41, 134, 'Inappropriate content', '2023-05-18'),
+    (702, 2, 135, 'Spamming', '2022-03-18'),
+    (703, 3, 136, 'Harassment', '2021-04-28'),
+    (704, 4, 137, 'Fake account', '2020-02-08'),
+    (705, 5, 138, 'Violation of terms', '2023-03-30'),
+Output:
+report_id	cid	post_id	report_reason			report_date
+701		41	134		Inappropriate content			2023-05-18
+702		2	135		Spamming				2022-03-18
+703		3	136		Harassment				2021-04-28
+704		4	137		Fake account				2020-02-08
+705		5	138		Violation of terms			2023-03-30
+706		6	139		Cyberbullying				2022-07-06
+707		7	140		Impersonation				2021-08-27
+708		8	141		Privacy infringement			2020-09-19
+709		9	142		Offensive content			2023-01-20
+15.Find the customer who have zero post likes.
+Command:
+SELECT Cust.cid, Cust.cname
+FROM Customer Cust
+LEFT JOIN Posts P ON Cust.cid = P.cid
+LEFT JOIN PostLikes PL ON P.post_id = PL.post_id
+GROUP BY Cust.cid, Cust.cname
+HAVING COUNT(PL.like_id) = 0;
+Output:
+cid	cname
+19	gill
+20	rahul
+21	krunal
+22	jaiswal
+23	virat
+24	chahhal
+25	russel
+26	DK
+27	chahhar
+28	pollard
+29	smriti
+30	harmanpreet
+31	chitra
+
+16.Find the average commentlikes who cid is 3.
+Command:
+SELECT AVG(like_id) AS avg_comment_likes
+FROM CommentLikes cl
+JOIN Customer cu ON cl.cid = cu.cid
+WHERE cl.cid = 3;
+Output:
+avg_comment_likes
+311
+
+17.Find the details of customer age between 20 and 30.
+Command:
+SELECT * FROM Customer WHERE cage BETWEEN 20 AND 30
+Output:
+cid	cname	         cemail		        password	registration_date	cage
+2	samuel         samuel@gmail.com    sam0140		2021-12-06		21
+4	jane_smith   jane@example.com    secret456		2022-02-01		26
+5	sid	        sid@gmail.com	        sid53		2020-08-30		20
+6	anirudh        anirudh@gmail.com   anirudh25	2021-02-24		29
+10	siri	        siri@gmail.com	        siri57		2014-09-17		26
+
+18.find out the total number of reports are there in report table.
+Command:
+SELECT COUNT(*) AS total_reports
+FROM Report;
+Output:
+total_reports
+20
+
+19.Find the like_id of commentlikes where commentid=205.
+Command:
+SELECT like_id FROM commentlikes WHERE comment_id=205
+Output:
+like_id
+308
+
+20.Find the total number of receivers that are in messages.
+Command:
+SELECT COUNT(DISTINCT receiver_id) as receivers FROM messages
+Output:
+receivers
+16
+
+21.Update the notification of a particular customer.
+Command:
+UPDATE notifications
+SET notification_id = '608'
+WHERE cid = '05'
+select * from notifications
+Output:
+notification_id  cid	notification_text					notification_date
+601		    1	You have a new message.				2023-05-18
+603		    3	Someone commented on your post.			2023-05-18
+604		    4	Your friend request has been accepted.		2023-04-11
+608		    5	You have been mentioned in a post.			2023-01-28
+606		    6	A new event has been created.			2022-05-30
+607		    7	You have a new friend suggestion.			2021-01-17
+608		    8	Your post has been shared.				2023-01-06
+609	                9	You have received a new friend request.		2022-09-19
+610		    10	Your profile has been updated.			2023-01-06
+611	                11	You have a new follower.				2022-10-18
+613		    13	Your event invitation has been accepted.		2022-07-06
+614		    14	You have a new notification.				2020-09-08
+
+22.Find the name of the group whose name starts with S and having atleast five Characters.
+Command:
+SELECT group_name FROM groups WHERE group_name LIKE 'T_%'
+Output:
+group_name
+Travel Junkies
+Tech Geeks
+
+23.Create a view from GroupMembers which include group_id,cid.
+Command:
+create view group_members as
+SELECT group_id,cid
+FROM GroupMembers
+select * from group_members
+Output:
+group_id	cid
+801		1
+802		2
+803		7
+804		10
+805		5
+806		6
+807		7
+808		8
+809		9
+810		10
+811		11
+812		12
+813		13
+814		14
+815		15
+816		16
+817		17
+818		18
+819		19
+820		20
+
+24.Display the top five report_id of reports.ind
+Command:
+select top(5) report_id from report
+Output:
+report_id
+701
+702
+703
+704
+705
+
+25.Find the report_reason of the customer who's cid=16.
+Command:
+SELECT report_reason
+FROM Report
+WHERE cid = 16;
+Output:
+report_reason
+Unauthorized access
+
+26.Create a temporary table for gender and for 5 customers.
+Command:
+select  top (5) * into gender from Profile where gender='Male'
+select * from gender
+
+Output:
+cid	full_name			date_of_birth		gender
+2	samuelpr			2001-12-06		Male
+3	john_doe			2003-01-19		Male
+4	jane_smith			1996-02-01		Male
+5	sid sriram			1986-08-30		Male
+6	anirudh ravichander		1999-02-24		Male
+
+27.Find the total number of posts poste by the age group is 20 & 30 .
+Command:
+SELECT COUNT(DISTINCT post_id) AS total_posts
+FROM posts p
+JOIN customer c ON p.cid = c.cid
+WHERE cage IN (20, 30);
+Output:
+total_posts
+23
+
+28.List all customers registered on or after 2022-01-01.
+Command:
+ SELECT * FROM Customer WHERE registration_date >= '2022-01-01';
+Output:
+cid  cname 	            cemail			password	registration_date       cage
+3     john_doe		john@example.com	pasword123	2023-01-19		32
+4     jane_smith           jane@example.com	secret456	2022-02-01		26
+12   anjali	           anjali@gmail.com	anjali547	2023-09-26		22
+18   faf		           faf@gmail.com	faf89		2023-06-14		NULL
+19   gill	           gill@gmail.com	gill09		2022-09-19		NULL
+22   jaiswal	           jaiswal@gmail.com	jaiswal64	2023-04-16		NULL
+31   chitra                   chitra@gmail.com	chitra93	2023-04-15		NULL
+33    Alice Johnson    alice@gmail.com	alice67		2022-03-12		NULL
+41    Alex Turner       alex@gmail.com	turner30	2023-02-14		NULL
+
+29. Find the customers who registered before 2017-01-01 and have the letter 'a' in their email.
+Command: 
+SELECT * FROM Customer WHERE registration_date < '2017-01-01' AND cemail LIKE '%a%';
+Output:
+cid	cname		cemail			password	registration_date	cage
+8	manu		manu@gmail.com	manu36	2016-01-05		41
+9	bhuvana	bhuvana@gmail.com	bhuvana68	2014-03-24		32
+10	siri		siri@gmail.com	siri57		2014-09-17		26
+11	mahi		mahi@gmail.com	mahi59		2016-09-14		37
+26	DK		dk@gmail.com	dk36		2016-03-28		NULL
+28	pollard		pollard2gmail.com	pollard69	2016-05-16		NULL
+34	Anderson	anderson@gmail.com	bob29		1988-11-05		NULL
+40	John Doe	john@gmail.com	doe96		2016-05-15		NULL
+
+30. Find the customers whose names start with the letter 's' and have registered in the year 2020.
+Command:
+ SELECT * FROM Customer WHERE cname LIKE 's%' AND YEAR(registration_date) = 2020;
+Output:
+cid	cname	     cemail		    password	      registration_date		cage
+1	swathi	     swathi@gmail.com   s10101	       2020-09-19		17
+5	sid	     sid@gmail.com	     sid53	       2020-08-30		20
+
+31. List the top 5 customers and their followers in alphabetical order of their names.
+Command:
+SELECT  top (5)c.cname, f.follower_id
+FROM Customer c
+JOIN Followers f ON c.cid = f.cid
+ORDER BY c.cname;
+Output:
+cname			follower_id
+Alex Turner		2
+Alex Turner		27
+Alice Johnson		5
+Alice Johnson		31
+anirudh		17
+
+32. List the top 10 customers and their post counts in descending order of post counts.
+Command:
+ SELECT top(10) c.cid, c.cname, COUNT(p.post_id) AS post_count
+FROM Customer c
+LEFT JOIN Post p ON c.cid = p.cid
+GROUP BY c.cid, c.cname
+ORDER BY post_count DESC;
+Output:
+cid	cname			post_count
+12	anjali			2
+22	jaiswal			2
+23	virat			2
+27	chahhar		2
+34	Bob Anderson		2
+40	John Doe		2
+11	mahi			1
+10	siri			1
+3	john_doe		1
+13	rayudu			1
+
+33.Find the customers who have a friend named 'Swathi'.
+Command:
+ SELECT c.*
+FROM Customer c
+JOIN Friends f ON c.cid = f.cid
+JOIN Customer friend ON f.friend_id = friend.cid
+WHERE friend.cname = 'Swathi';
+Output:
+cid	cname		cemail			password	registration_date	cage
+2	samuel             samuel@gmail.com	sam0140	2021-12-06		21
+
+34.How many male customers are registered on the social media site?
+Command:
+ SELECT COUNT(*) as Male_Count FROM Profile WHERE gender = 'Male';
+Output:
+Male_Count
+30
+
+35.List the customers who have a pending friend request.
+Command:
+ SELECT Customer.cid, Customer.cname FROM Customer
+INNER JOIN Friends ON Customer.cid = Friends.cid
+WHERE Friends.status = 'Pending';
+Output:
+cid	cname
+2	samuel
+5	sid
+13	rayudu
+16	rohit
+
+36.List the customers who registered before the year 2015.
+Command:
+ SELECT c.cname FROM Customer c WHERE YEAR(c.registration_date) < 2015;
+Output:
+cname
+bhuvana
+siri
+Bob Anderson
+
+37.List the five  customers who have posted on the social media site after the year 2022.
+Command:
+ SELECT  top(5) c.cname FROM Customer c JOIN Post p ON c.cid = p.cid WHERE YEAR(p.post_date) > 2022;
+Output:
+cname
+gill
+dhoni
+chahhar
+mahi
+Bob Anderson
+
+38. How many customers have both friends and followers?
+Command:
+ SELECT COUNT(*) as Common_Friends  FROM (SELECT DISTINCT cid FROM Friends)
+AS friends_list JOIN (SELECT DISTINCT cid FROM Followers) 
+AS followers_list ON friends_list.cid = followers_list.cid;
+Output:
+Common_Friends
+20
+
+39. List the customers who have the same full name in their profile.
+Command:
+ SELECT p.full_name FROM Profile p GROUP BY p.full_name HAVING COUNT(*) > 1;
+Output:
+full_name
+
+40.What is the most recent registration date?
+Command:
+ SELECT MAX(registration_date) FROM Customer;
+Output:
+(No column name)
+2023-09-26
+
+41.List the  10 customers who have accepted friend requests.
+Command:
+ SELECT top(10) Customer.cid, Customer.cname FROM Customer
+INNER JOIN Friends ON Customer.cid = Friends.cid
+WHERE Friends.status = 'Accepted';
+Output:
+cid	cname
+1	swathi
+3	john_doe
+4	jane_smith
+6	anirudh
+7	sunny
+8	manu
+9	bhuvana
+10	siri
+11	mahi
+12	anjali
+
+42.List the customers who have made a post on a specific date, say '2023-05-18'.
+Command:
+ SELECT DISTINCT cid FROM Post WHERE post_date = '2023-05-18';
+Output:
+cid
+11
+14
+21
+23
+27
+
+43.List the customers who have not made any posts.
+Command:
+ SELECT cid,cname FROM Customer WHERE cid NOT IN (SELECT DISTINCT cid FROM Post);
+Output:
+cid	cname
+1	swathi
+2	samuel
+4	jane_smith
+5	sid
+6	anirudh
+7	sunny
+8	manu
+9	bhuvana
+15	jadeja
+16	rohit
+17	hardik
+18	faf
+
+44.List the customers whose names start with the letter 'S'.
+Command:
+ SELECT * FROM Customer WHERE cname LIKE 'S%';
+
+
+Output:
+
+cid	cname		cemail			password	registration_date	cage
+1	swathi	            swathi@gmail.com	s10101		2020-09-19		17
+2	samuel	             samuel@gmail.com	sam0140	2021-12-06		21
+5	sid		sid@gmail.com	sid53		2020-08-30		20
+7	sunny		sunny@gmail.com	sunny54	2019-04-18		39
+10	siri		siri@gmail.com	siri57		2014-09-17		26
+29	smriti	            smriti@gmail.com	smriti47	2021-01-10		NULL
+36	Sam Wilson	sam@gmail.com 	sam888	2021-09-02		NULL
+39	Sara Miller	miller@gmail.com	sara32		2017-06-29		NULL
+
+45.List the customers whose names end with the letter 'l'.
+Command:
+SELECT * FROM Customer WHERE cname LIKE '%l';
+Output:
+cid	cname		cemail			password	registration_date	cage
+2	samuel		samuel@gmail.com	sam0140	2021-12-06		21
+19	gill		gill@gmail.com	gill09		2022-09-19		NULL
+20	rahul		rahul@gmail.com	rahul23	2018-04-23		NULL
+21	krunal		krunal@gail.com	krunal86	2019-06-17		NULL
+22	jaiswal		jaiswal@gmail.com	jaiswal64	2023-04-16		NULL
+24	chahhal	chahhal@gmail.com	chahhal14	2019-02-12		NULL
+25	russel		russel@gmail.com	russel41	2017-08-30		NULL
+
+46.List the customers in the order of their registration date, starting from the latest.
+Command:
+ SELECT * FROM Customer ORDER BY registration_date DESC;
+Output:
+cid	cname		cemail			password	registration_date	cage
+12	anjali		anjali@gmail.com	anjali547	2023-09-26		22
+18	faf		faf@gmail.com	faf89		2023-06-14		NULL
+22	jaiswal		jaiswal@gmail.com	jaiswal64	2023-04-16		NULL
+31	chitra		chitra@gmail.com	chitra93	2023-04-15		NULL
+41	Alex Turner	alex@gmail.com	turner30	2023-02-14		NULL
+3	john_doe	john@example.com	password123	2023-01-19		32
+19	gill		gill@gmail.com	gill09		2022-09-19		NULL
+33	Alice Johnson	alice@gmail.com	alice67		2022-03-12		NULL
+4	jane_smith	jane@example.com	secret456	2022-02-01		26
+2	samuel		samuel@gmail.com	sam0140	2021-12-06		21
+
+
+
+
+47.List the customers who have the highest registration date.
+Command:
+ SELECT * FROM Customer WHERE registration_date = (SELECT MAX(registration_date) FROM Customer);
+
+Output:
+cid	cname		cemail			password	registration_date	cage
+12	anjali		anjali@gmail.com	anjali547	2023-09-26		22
+
+48.List the customer ID, customer name, and date of birth of customers who were born in the month is 9.
+Command:
+SELECT c.cid, c.cname, p.date_of_birth
+FROM Customer c JOIN Profile p ON c.cid = p.cid
+WHERE MONTH(p.date_of_birth) = 9;
+Output:
+cid	cname		date_of_birth
+1	swathi		2005-09-19
+10	siri		1996-09-17
+11	mahi		1986-09-14
+12	anjali		1997-09-26
+19	gill		2000-09-19
+32	Jane Smith	1995-09-20
+36	Sam Wilson	1991-09-02
+
+49.Find the top 5 customers with their cid, cname, and the count of their friends, including customers who may not have any friends, sorted by the friend count in descending order."
+Command:
+SELECT top(5) c.cid, c.cname, COUNT(f.friend_id) AS friend_count
+FROM Customer c LEFT JOIN Friends f ON c.cid = f.cid
+GROUP BY c.cid, c.cname
+Output:
+cid	cname		friend_count
+1	swathi		1
+2	samuel		1
+3	john_doe	1
+4	jane_smith	1
+5	sid		1
+
+50.Find the top 11 customers with their customer ID, customer name, and the count of their posts, sorted by the post count in descending order."
+
+Command:
+SELECT top(11) c.cid, c.cname, COUNT(*) AS post_count
+FROM Customer c JOIN Post p ON c.cid = p.cid
+GROUP BY c.cid, c.cname;
+
+Output:
+cid	cname		post_count
+3	john_doe	1
+10	siri		1
+11	mahi		1
+12	anjali		2
+13	rayudu		1
+14	dhoni		1
+19	gill		1
+20	rahul		1
+21	kruna		1
+22	jaiswal		2
+23	virat		2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
