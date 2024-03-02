@@ -1,0 +1,9 @@
+1.2 Problem Statement
+Problem Statement: 
+The objective of this social networking site DBMS project is to design and implement a scalable and efficient database management system to support the functionalities of a social networking platform. The current challenge lies in managing and organizing the vast amount of user-generated data, ensuring smooth user interactions, and maintaining data integrity and security.
+
+The existing social networking platforms struggle with issues such as slow response times, data inconsistencies, and difficulties in handling increasing user loads. The primary problem to address in this project is to develop a DBMS that can effectively store, retrieve, and manage user profiles, posts, comments, friend connections, and other relevant data. The system should be designed to handle a large number of concurrent users, while providing a seamless and personalized user experience.
+
+Furthermore, the project needs to address privacy concerns and implement robust security measures to protect user data. The DBMS should have mechanisms to authenticate and authorize users, enforce privacy settings, and safeguard sensitive information. Additionally, the system should incorporate efficient algorithms for news feed generation, personalized recommendations, and content filtering, to enhance user engagement and satisfaction.
+
+By addressing these challenges, the social networking site DBMS project aims to create a reliable and scalable platform that ensures fast and secure access to user data, enhances user interactions, and delivers an immersive and personalized social networking experience.
