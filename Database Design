@@ -1,0 +1,96 @@
+2.1 List of Attributes, entities and relationship
+1.	Entity Name:  Customer
+Attributes	Type
+cid	int(10)
+cname	varchar(50)
+cemail	varchar(100)
+password	varchar(100)
+Registration_date	date
+
+2.	Entity Name:  Profile
+Attributes	Type
+cid	int(10)
+Full_name	varchar(100)
+date_of_birth	date
+gender	varchar(10)
+
+3.	Entity Name:  Friends
+Attributes	Type
+cid	int(10)
+friend_id	int
+status	Varchar(20)
+
+4.	Entity Name:  Followers
+Attributes	Type
+cid	int(10)
+follower_id	int(10)
+
+5.	Entity Name:  Post
+Attributes	Type
+Post_id	int(10)
+cid	int(10)
+post_text	varchar(255)
+Post_date	date
+
+6.	Entity Name:  Comments
+Attributes	Type
+Comment_id	int(10)
+post_id	int
+cid	Int(10)
+content	varchar(500)	
+
+7.	Entity Name:  PostLikes
+Attributes	Type
+like_id	int(10)
+Post_id	int(10)
+cid	int(10)
+	
+
+8.	Entity Name: CommentLikes
+Attributes	Type
+like_id	int(10)
+Comment_id	int(10)
+cid	Int(10)
+
+
+9.	Entity Name:  Conversations
+Attributes	Type
+conversation_id	int(10)
+user1_id	Int(10)
+user2_id	Int(10)
+
+10.	Entity Name:  Messages
+Attributes	Type
+message_id	int(10)
+conversation_id	int(10)
+Sender_id	Int(10)
+Reciver_id	Int(10)
+content	varchar(1000)
+
+11.	Entity Name:  Notifications
+Attributes	Type
+Notification_id	int(10)
+cid	Int(10)
+Nitification_text	text
+notification_date	date
+
+
+12.	Entity Name:  Groups
+Attributes	Type
+Group_id	int(10)
+Group_name	varchar(100)
+Group_description	text
+
+13.	Entity Name:  GroupMembers
+Attributes	Type
+Group_id	int(10)
+cid	Int(10)
+Join_date	date
+     14.Entity Name:Report
+ 
+Attributes	Type
+Report_id	Int(10)
+cid	Int(10)
+Post_id	Int(10)
+Report_reason	text
+Report_date	date
